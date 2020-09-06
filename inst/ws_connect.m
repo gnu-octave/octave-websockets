@@ -17,8 +17,8 @@
 ## see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{status} =} ws_connect (@var{host}, @var{uri})
-## @deftypefnx {Function File} {@var{status} =} ws_connect (@var{host}, @var{uri}, @var{port})
+## @deftypefn {Function File} {@var{ws} =} ws_connect (@var{host}, @var{uri})
+## @deftypefnx {Function File} {@var{ws} =} ws_connect (@var{host}, @var{uri}, @var{port})
 ##
 ## Connect to the WebSocket server at the given ``uri``.
 ##
@@ -32,7 +32,17 @@
 ## @item @var{port}
 ## the target port (integer) of the host
 ## @end itemize
-## @var{status} a status code (int) indicating success (0) or failure (-1) in the connection.
+## @var{ws} a WebSocket sctructure with the following items.
+## @itemize @bullet
+## @item @var{client}
+## a specific TCP socket for this connection.
+## @item @var{host}
+## the IP address of the host, in string format.
+## @item @var{uri}
+## the uri (string) to consult in the websocket host, it must start with "/".
+## @item @var{port}
+## the target port (integer) of the host
+## @end itemize
 ## 
 ## @end deftypefn
 
@@ -40,21 +50,25 @@
 ## Keywords:      websockets-package websockets connect
 ## Directory:     octave-websockets/inst/
 ## Filename:      ws_connect.m
-## Last-Modified: 4 Sep 2020
+## Last-Modified: 6 Sep 2020
 
-function status = ws_connect (host, uri, port = 80)
-	
+function ws = ws_connect (host, uri, port = 80)
+
+	ws.host = host;
+	ws.uri = uri;
+	ws.port = port;
+
 	sec_websocket_key =  generate_secret_key();
 	expected_key = calculate_expected_key(sec_websocket_key);
 
-	client = socket(AF_INET, SOCK_STREAM, 0);
+	ws.client = socket(AF_INET, SOCK_STREAM, 0);
 	server_info = struct("addr", host, "port", port);
-	rc = connect(client, server_info);
+	rc = connect(ws.client, server_info);
 
 	header = build_handshake_header(uri, host, port, sec_websocket_key);
-	send(client, header);
+	send(ws.client, header);
 
-	handshake_r = recv(client, 129);
+	handshake_r = recv(ws.client, 129);
 	c_handshake = char(handshake_r);
 
 	ACCEPTANCE_STRING = "Sec-WebSocket-Accept";
@@ -64,9 +78,9 @@ function status = ws_connect (host, uri, port = 80)
 	key_compare = strcmp(expected_key, response_key);
 
 	if key_compare
-		status = 0;
+		ws.status = "connected";
 	else
-		status = 1;
+		ws.status = "disconneced";
 	endif
 
 endfunction
