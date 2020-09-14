@@ -1,0 +1,8 @@
+stages:
+  - doctest
+
+doctesting:
+  stage: doctest
+  script: octave --eval "pkg load doctest; doctest $CI_PROJECT_DIR/inst"
+  tags:
+    - octave-doctest
