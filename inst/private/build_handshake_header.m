@@ -36,6 +36,16 @@
 ## negotiate a communication using the Websocket protocol.
 ## 
 ## @end deftypefn
+##
+## @example
+## header = build_handshake_header ("/chat", "server.example.com", 80, "dGhlIHNhbXBsZSBub25jZQ==")
+## -| header = GET /chat HTTP/1.1
+## -| Host: server.example.com:80
+## -| Upgrade: websocket
+## -| Connection: Upgrade
+## -| Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
+## -| Sec-WebSocket-Version: 13
+## @end example
 
 ## Author:        M. Miretti
 ## Keywords:      websockets-package websockets private key-generation
@@ -44,7 +54,6 @@
 ## Last-Modified: 2 Sep 2020
 
 function header = build_handshake_header (uri, host, port, key)
-
 	header = cstrcat("GET ", uri," HTTP/1.1\r\n",
 			 "Host: ", host,":", int2str(port),"\r\n",
 			 "Upgrade: websocket\r\n",

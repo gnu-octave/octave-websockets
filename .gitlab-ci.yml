@@ -3,6 +3,6 @@ stages:
 
 doctesting:
   stage: doctest
-  script: octave --eval "pkg load doctest; doctest $CI_PROJECT_DIR/inst"
+  script: octave --eval "pkg load doctest; addpath('$CI_PROJECT_DIR/inst/private'); success = doctest('$CI_PROJECT_DIR/inst'); exit(not(success))"
   tags:
     - octave-doctest
