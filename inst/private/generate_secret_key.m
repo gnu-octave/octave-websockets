@@ -28,6 +28,11 @@
 ## a base64 encoded string of 24 characters
 ## @end itemize
 ## @end deftypefn
+##
+## @example
+## key_len = length(generate_secret_key ())
+## -| key_len = 24
+## @end example
 
 ## Author:        M. Miretti
 ## Keywords:      websockets-package websockets private key-generation

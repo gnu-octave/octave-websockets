@@ -5,7 +5,7 @@ Author: Marco Miretti
 Maintainer: Marco Miretti <marco.miretti@gmail.com>
 Title: Websockets
 Description: Simple implementation of the Websockets protocol for GNU Octave.
-Depends: octave (>= 3.2.0), sockets (>= 1.2.0), strings (>= 1.2.0)
+Depends: octave (>= 3.2.0), sockets (>= 1.2.0)
 # BuildRequires:
 # SystemRequirements:
 License: GPLv3+

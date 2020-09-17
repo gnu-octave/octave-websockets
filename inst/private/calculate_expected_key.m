@@ -36,12 +36,16 @@
 ## a base64 encoded string with size 28
 ## @end itemize
 ##
-## @example
 ## given the input string "dGhlIHNhbXBsZSBub25jZQ==", it will be concatenated
 ## with the GUID, resulting in "dGhlIHNhbXBsZSBub25jZQ==258EAFA5-E914-47DA-95CA-
 ## C5AB0DC85B11" then the SHA-1 of this string will be computed giving the value
 ## "b37a4f2cc0624f1690f64606cf385945b2bec4ea", which will then be base64 encoded
 ## and returned as "s3pPLMBiTxaQ9kYGzzhZRbK+xOo=".
+##
+##
+## @example
+## s = calculate_expected_key ("dGhlIHNhbXBsZSBub25jZQ==")
+## -| s = s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
 ## @end example
 ##
 ## Because calculate_expected_key is a private function, called only by the 
