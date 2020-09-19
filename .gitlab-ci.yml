@@ -1,8 +1,18 @@
 stages:
+  - build
   - doctest
+
+build:
+  stage: build
+  script: make version
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/target/*.tar.gz
+  tags:
+    - octave-doctest
 
 doctesting:
   stage: doctest
-  script: octave --eval "pkg load doctest; addpath('$CI_PROJECT_DIR/inst/private'); success = doctest('$CI_PROJECT_DIR/inst'); exit(not(success))"
+  script: octave --eval "pkg load doctest; addpath('$CI_PROJECT_DIR/src/private'); success = doctest('$CI_PROJECT_DIR/src'); exit(not(success))"
   tags:
     - octave-doctest
