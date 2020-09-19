@@ -2,4 +2,4 @@ websockets >> Websockets Package.
 Websocket connection
  ws_connect
  ws_receive
- ws_write
+ ws_send
