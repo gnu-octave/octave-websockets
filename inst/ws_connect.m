@@ -52,6 +52,8 @@
 ## Filename:      ws_connect.m
 ## Last-Modified: 6 Sep 2020
 
+## PKG_ADD pkg load sockets;
+
 function ws = ws_connect (host, uri, port = 80)
 
 	ws.host = host;
