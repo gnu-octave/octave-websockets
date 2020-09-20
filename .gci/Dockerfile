@@ -1,4 +1,2 @@
 FROM mtmiller/octave
-COPY doctest_install.m /home/install.m
-
-RUN octave /home/install.m
+RUN octave --eval 'pkg install -forge doctest; pkg install -forge sockets; pkg install -forge generate_html'
