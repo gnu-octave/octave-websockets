@@ -22,3 +22,12 @@ version_tarball  := $(target_dir)/$(package)-$(shell git rev-parse --short HEAD)
 version:
 	mkdir -p $(target_dir)
 	git archive --format=tar --prefix=$(version_dir)/ HEAD | gzip >$(version_tarball)
+
+install: version
+	octave --eval "pkg install $(version_tarball)"
+
+htmldoc: install
+	octave --eval "pkg load generate_html; options = get_html_options ('octave-forge'); generate_package_html ('websockets', 'public', options);"
+
+clean:
+	rm -rf $(target_dir)
