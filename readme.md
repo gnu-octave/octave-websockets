@@ -2,5 +2,5 @@
 
 A Websockets package for GNU Octave, based in the sockets package.
 
-[![pipe status](https://gitlab.com/marcomiretti/octave-websockets/badges/master/pipeline.svg)](https://gitlab.com/marcomiretti/octave-websockets/pipelines/master/latest) [![Generic badge](https://img.shields.io/badge/tarball-latest-blue.svg)](https://gitlab.com/marcomiretti/octave-websockets/-/jobs/artifacts/master/browse/target?job=build)
+[![pipe status](https://gitlab.com/gnuoctave/octave-websockets/badges/master/pipeline.svg)](https://gitlab.com/gnuoctave/octave-websockets/pipelines/master/latest) [![Generic badge](https://img.shields.io/badge/tarball-latest-blue.svg)](https://gitlab.com/gnuoctave/octave-websockets/-/jobs/artifacts/master/browse/target?job=build) [![Generic badge](https://img.shields.io/badge/docs-latest-blue.svg)](https://gnuoctave.gitlab.io/octave-websockets/websockets/)
 ------

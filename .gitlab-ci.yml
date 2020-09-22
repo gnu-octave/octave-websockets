@@ -1,6 +1,7 @@
 stages:
   - build
-  - doctest
+  - test
+  - html 
 
 build:
   stage: build
@@ -12,7 +13,24 @@ build:
     - octave-doctest
 
 doctesting:
-  stage: doctest
+  stage: test
   script: octave --eval "pkg load doctest; addpath('$CI_PROJECT_DIR/inst/private'); success = doctest('$CI_PROJECT_DIR/inst'); exit(not(success))"
   tags:
     - octave-doctest
+
+installability:
+  stage: test
+  script: make install 
+  tags:
+    - octave-doctest
+
+pages:
+  stage: html
+  script: make htmldoc
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/public/*
+  tags:
+    - octave-doctest
+  only:
+    - tags
